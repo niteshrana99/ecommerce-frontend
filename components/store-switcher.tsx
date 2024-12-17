@@ -8,14 +8,13 @@ import { Check, ChevronsUpDownIcon, PlusCircle, Store, StoreIcon } from 'lucide-
 import { cn } from '@/lib/utils';
 import { Command, CommandEmpty, CommandItem } from './ui/command';
 import { CommandGroup, CommandInput, CommandList, CommandSeparator } from 'cmdk';
-import { StoreModal } from './modals/storeModal';
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger
 >;
 
 interface StoreSwitcherProps extends PopoverTriggerProps {
-  items: any[];
+  items: { id: string; name: string }[] | [];
 }
 
 const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {

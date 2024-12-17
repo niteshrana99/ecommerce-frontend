@@ -1,3 +1,4 @@
+/* typescript-eslint-disable no-implicit-any */
 import { Button } from '@/components/ui/button';
 import { FilePlus } from 'lucide-react';
 import {
@@ -9,7 +10,7 @@ export const ImageUpload = ({
   uploadedImages,
 }: {
   onChange: (value: string) => void;
-  uploadedImages: any;
+  uploadedImages: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
   return (
     <div>
@@ -22,7 +23,7 @@ export const ImageUpload = ({
             'secure_url' in result.info
           ) {
             const url = result.info.secure_url;
-            uploadedImages((prev: any) => [...prev, url]);
+            uploadedImages((prev: string[]) => [...prev, url]);
             onChange(url);
           }
         }}

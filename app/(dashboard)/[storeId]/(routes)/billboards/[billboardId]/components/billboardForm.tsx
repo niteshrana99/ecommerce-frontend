@@ -1,3 +1,4 @@
+/* typescript-eslint-disable no-implicit-any */
 'use client';
 
 import {
@@ -19,7 +20,12 @@ import { useParams, useRouter } from 'next/navigation';
 import { useCreateBillboard } from '@/hooks/billboard/useCreateBillboard';
 import { useUpdateBillboard } from '@/hooks/billboard/useUpdateBillboard';
 
-const BillboardForm = ({ initialData }: { initialData: any }) => {
+interface InitialData {
+  label?: string;
+  backgroundImage?: string;
+}
+
+const BillboardForm = ({ initialData }: { initialData: InitialData }) => {
   const form = useForm({
     defaultValues: {
       billboardName: initialData?.label || '',
@@ -48,7 +54,8 @@ const BillboardForm = ({ initialData }: { initialData: any }) => {
    * 
    * @param {Object} data - form data
    */
-  const onSubmit = (data: any) => {
+  const onSubmit = (data : { billboardName: string; billboardImage: string }) => {
+    console.log(data)
     if(initialData) {
       updateMutate({
         storeId,

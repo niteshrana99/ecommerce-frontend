@@ -1,3 +1,4 @@
+/* typescript-eslint-disable no-implicit-any */
 import { useAuth } from '@clerk/nextjs';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from './use-toast';

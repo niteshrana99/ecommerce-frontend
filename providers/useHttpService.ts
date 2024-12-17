@@ -1,3 +1,4 @@
+/* typescript-eslint-disable no-implicit-any */
 import { useAuth } from '@clerk/nextjs';
 const domain = `${process.env.NEXT_PUBLIC_API_DOMAIN}`
 

@@ -17,6 +17,7 @@ type Billboard = {
   id: string;
   label: string;
   creationDate: string;
+  createdAt: string;
 };
 
 export const useColumns = () => {
@@ -44,13 +45,13 @@ export const useColumns = () => {
     {
       accessorKey: 'createdAt',
       header: 'Creation Date',
-      cell: ({ row }: { row: any }) => {
-        return format(row.original.createdAt, 'MMM dd, yyyy');
+      cell: ({ row }) => {
+        return format(row.original?.createdAt, 'MMM dd, yyyy');
       },
     },
     {
       id: 'actions',
-      cell: ({ row }: { row: any }) => {
+      cell: ({ row }) => {
         const { id } = row.original;
         return (
           <DropdownMenu>

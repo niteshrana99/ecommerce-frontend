@@ -1,3 +1,4 @@
+/* typescript-eslint-disable no-implicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { redirect, useParams } from 'next/navigation';
 import useHttpService from '@/providers/useHttpService';

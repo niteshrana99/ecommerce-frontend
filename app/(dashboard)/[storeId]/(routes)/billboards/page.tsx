@@ -7,7 +7,6 @@ import { useGetBillBoards } from '@/hooks/billboard/useGetBillboards';
 import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useColumns } from './[billboardId]/components/useColumns';
-import { ColumnDef, Row } from '@tanstack/react-table';
 import { APIList } from './[billboardId]/components/api-list';
 
 const Billboards = () => {

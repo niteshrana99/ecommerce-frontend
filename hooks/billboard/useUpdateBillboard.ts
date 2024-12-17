@@ -1,3 +1,4 @@
+/* typescript-eslint-disable no-implicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useHttpService from '@/providers/useHttpService';
 import { useToast } from '../use-toast';

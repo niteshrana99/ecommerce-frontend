@@ -50,7 +50,7 @@ export const SettingsForm = ({ initialData }: SettingFormProps) => {
   const { mutate: deleteStore } = useDeleteStore();
   const [alertModal, setAlertModal] = useState(false);
 
-  const onUpdateFormPrefrences = (data: any) => {
+  const onUpdateFormPrefrences = (data : Omit<InitialData, 'id'>) => {
     mutate(data);
   };
   return (

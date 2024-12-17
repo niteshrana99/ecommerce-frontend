@@ -7,7 +7,6 @@ import { Button } from '../ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useCreateStoreAPI } from '@/hooks/useCreateStoreAPI';
-import { redirect } from 'next/navigation';
 
 const formSchama = z.object({
   name: z.string().min(3, 'Name must contain three or more letters'),

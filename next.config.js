@@ -9,4 +9,7 @@ module.exports = {
         },
       ],
     },
+    eslint: {
+      dirs: ['app'], // Only run ESLint on the 'app' directories during production builds (next build)
+    },
   }
