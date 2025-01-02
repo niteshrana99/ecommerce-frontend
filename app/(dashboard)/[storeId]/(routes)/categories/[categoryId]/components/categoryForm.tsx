@@ -56,7 +56,7 @@ const CategoryForm = ({ initialData }: { initialData: InitialData }) => {
     push(`/${storeId}/categories`);
   };
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: InitialData) => {
     if(initialData) {
         updateMutate(
         {
@@ -117,7 +117,7 @@ const CategoryForm = ({ initialData }: { initialData: InitialData }) => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {!billboardsLoading && billboards.map((billboard: any) => (
+                      {!billboardsLoading && billboards.map((billboard: { id: string; label: string }) => (
                         <SelectItem key={billboard.id} value={billboard.id}>
                           {billboard.label}
                         </SelectItem>
