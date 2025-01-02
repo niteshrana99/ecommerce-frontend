@@ -1,29 +1,28 @@
 /* typescript-eslint-disable no-implicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
 import useHttpService from '@/providers/useHttpService';
 import { useToast } from '../use-toast';
+import { useParams } from 'next/navigation';
 
-export const useCreateBillboard = () => {
+export const useUpdateCategory = () => {
   const { toast } = useToast();
-  const { post } = useHttpService();
+  const { patch } = useHttpService();
   const queryClient = useQueryClient();
   const { storeId } = useParams();
-  
   return useMutation({
     mutationFn: async (request: any) => {
-      const data = await post(`createBillboard`, request);
+      const data = await patch(`updateCategory`, request);
       return data;
     },
     onSuccess: () => {
         toast({
-            description: "Billboard created successfully.",
+            description: "Category updated successfully.",
         });
-        queryClient.invalidateQueries({ queryKey: ["getAllBillboards", storeId] });
+        queryClient.invalidateQueries({ queryKey: ["getCategories", storeId] });
     },
     onError: (e: any) => {
         toast({
-            description: "Billboard creation failed.",
+            description: "Category updation failed.",
             variant: "destructive"
         });
     },
