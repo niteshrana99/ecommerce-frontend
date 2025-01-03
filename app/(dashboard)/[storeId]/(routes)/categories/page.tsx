@@ -26,7 +26,7 @@ const Billboards = () => {
     <div className='flex flex-col'>
       <div className='flex p-8 justify-between items-center'>
         <Heading
-          title={`Categories (${categoriesList.length})`}
+          title={`Categories (${categoriesList?.length})`}
           description='Manage categories for your store'
         />
         <Button onClick={addNewCategory}>
