@@ -5,19 +5,21 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
-import { useColumns } from './[categoryId]/components/useColumns';
-import { APIList } from './[categoryId]/components/api-list';
-import { useGetCategories } from '@/hooks/categories/useGetCategories';
+import { useGetSizes } from '@/hooks/sizes/useGetSizes';
+import { useColumns } from './[sizeId]/components/useColumns';
+import { APIList } from './[sizeId]/components/api-list';
 
-const Categories = () => {
+const Sizes = () => {
   const { storeId } = useParams();
   const { push } = useRouter();
 
-  const { data: categoriesList, isLoading } = useGetCategories();
+  const { data: sizes, isLoading } = useGetSizes();
   const columns = useColumns();
 
-  const addNewCategory = () => {
-    push(`/${storeId}/categories/new`);
+  console.log(sizes);
+
+  const addNewSize = () => {
+    push(`/${storeId}/sizes/new`);
   };
 
   if (isLoading) return <></>;
@@ -26,10 +28,10 @@ const Categories = () => {
     <div className='flex flex-col'>
       <div className='flex p-8 justify-between items-center'>
         <Heading
-          title={`Categories (${categoriesList?.length})`}
-          description='Manage categories for your store'
+          title={`Sizes (${sizes.length})`}
+          description='Manage sizes for your store'
         />
-        <Button onClick={addNewCategory}>
+        <Button onClick={addNewSize}>
           <Plus className='h-4 w-4' />
           Add
         </Button>
@@ -39,21 +41,21 @@ const Categories = () => {
       <div className='p-4 pl-12 pr-12'>
         <DataTable
           columns={columns}
-          data={categoriesList}
+          data={sizes}
         />
       </div>
 
       <div className='flex p-8 flex-col'>
         <Heading
           title={`API`}
-          description='API calls for categories'
+          description='API calls for sizes'
         />
         
       </div>
       <Separator />
-        <APIList entityName='categories' entityIdName='categoryId' />
+        <APIList entityName='sizes' entityIdName='sizeId' />
     </div>
   );
 };
 
-export default Categories;
+export default Sizes;
