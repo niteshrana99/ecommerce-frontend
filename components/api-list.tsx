@@ -11,7 +11,7 @@ export const APIList = ({entityName, entityIdName}: APIListProps) => {
 
     const params = useParams();
 
-    const baseUrl = `http://3.85.60.19/api/${params.storeId}`
+    const baseUrl = `https://ecommerce-sever-zc8lh.ondigitalocean.app/api/${params.storeId}`
     return <div className="p-8">
         <ApiAlert title="GET" variant="public" description={`${baseUrl}/${entityName}`} />
         <ApiAlert title="GET" variant="public" description={`${baseUrl}/${entityName}/{${entityIdName}}`} />
