@@ -6,8 +6,8 @@ import { Separator } from '@/components/ui/separator';
 import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useColumns } from './[categoryId]/components/useColumns';
-import { APIList } from './[categoryId]/components/api-list';
 import { useGetCategories } from '@/hooks/categories/useGetCategories';
+import { APIList } from '@/components/api-list';
 
 const Categories = () => {
   const { storeId } = useParams();

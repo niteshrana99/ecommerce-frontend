@@ -1,4 +1,3 @@
-/* typescript-eslint-disable no-implicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useHttpService from '@/providers/useHttpService';
 import { useToast } from '../use-toast';
@@ -8,10 +7,10 @@ export const useUpdateSize = () => {
   const { toast } = useToast();
   const { patch } = useHttpService();
   const queryClient = useQueryClient();
-  const { storeId } = useParams();
+  const { storeId, sizeId } = useParams();
   return useMutation({
     mutationFn: async (request: any) => {
-      const data = await patch(`${storeId}/updateSize`, request);
+      const data = await patch(`${storeId}/sizes/${sizeId}`, request);
       return data;
     },
     onSuccess: () => {
@@ -19,6 +18,7 @@ export const useUpdateSize = () => {
             description: "Size updated successfully.",
         });
         queryClient.invalidateQueries({ queryKey: ["getAllSizes", storeId] });
+        queryClient.invalidateQueries({ queryKey: ["getSizeById", sizeId] });
     },
     onError: (e: any) => {
         toast({

@@ -11,7 +11,7 @@ export const useDeleteSize = () => {
 
     return useMutation({
         mutationFn: async (id: string) => {
-            const response = deleteRequest(`${storeId}/deleteSize/${id}`);
+            const response = deleteRequest(`${storeId}/sizes/${id}`);
             return response;
         },
         onSuccess: () => {

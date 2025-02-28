@@ -12,7 +12,7 @@ export const useDeleteCategory = () => {
 
     return useMutation({
         mutationFn: async (categoryId: string) => {
-            const response = deleteRequest(`deleteCategory/${categoryId}`);
+            const response = deleteRequest(`${storeId}/categories/${categoryId}`);
             return response;
         },
         onSuccess: () => {

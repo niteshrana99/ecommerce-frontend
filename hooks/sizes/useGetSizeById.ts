@@ -9,7 +9,7 @@ export const useGetSizeById = () => {
     return useQuery({
         queryKey: ['getSizeById', sizeId],
         queryFn: async () => {
-            const response = await get(`${storeId}/size/${sizeId}`);
+            const response = await get(`${storeId}/sizes/${sizeId}`);
             return response;
         },
     })

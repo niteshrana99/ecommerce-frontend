@@ -7,7 +7,7 @@ import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useGetSizes } from '@/hooks/sizes/useGetSizes';
 import { useColumns } from './[sizeId]/components/useColumns';
-import { APIList } from './[sizeId]/components/api-list';
+import { APIList } from '@/components/api-list';
 
 const Sizes = () => {
   const { storeId } = useParams();
@@ -15,8 +15,6 @@ const Sizes = () => {
 
   const { data: sizes, isLoading } = useGetSizes();
   const columns = useColumns();
-
-  console.log(sizes);
 
   const addNewSize = () => {
     push(`/${storeId}/sizes/new`);

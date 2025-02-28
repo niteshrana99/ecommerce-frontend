@@ -1,4 +1,3 @@
-/* typescript-eslint-disable no-implicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import useHttpService from '@/providers/useHttpService';
@@ -12,7 +11,7 @@ export const useCreateBillboard = () => {
   
   return useMutation({
     mutationFn: async (request: any) => {
-      const data = await post(`createBillboard`, request);
+      const data = await post(`${storeId}/billboards`, request);
       return data;
     },
     onSuccess: () => {

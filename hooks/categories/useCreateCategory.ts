@@ -11,7 +11,7 @@ export const useCreateCategory = () => {
 
   return useMutation({
     mutationFn: async (request: any) => {
-      const data = await post(`createCategory`, request);
+      const data = await post(`${storeId}/categories`, request);
       return data;
     },
     onSuccess: () => {

@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation"
 
 export const useGetBillBoardById = () => {
-    const { billboardId } = useParams();
+    const { billboardId, storeId } = useParams();
     const { get } = useHttpService();
 
     return useQuery({
         queryKey: ['getBillboardById', billboardId],
         queryFn: async () => {
-            const response = await get(`getBillboardById/${billboardId}`);
+            const response = await get(`${storeId}/billboards/${billboardId}`);
             return response;
         },
     })

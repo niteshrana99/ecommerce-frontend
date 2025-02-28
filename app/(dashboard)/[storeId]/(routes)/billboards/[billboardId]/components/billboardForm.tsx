@@ -1,4 +1,3 @@
-/* typescript-eslint-disable no-implicit-any */
 'use client';
 
 import {
@@ -11,22 +10,28 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
-import { ImageUpload } from './imageUpload';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import Image from 'next/image';
-import { Trash2Icon } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useCreateBillboard } from '@/hooks/billboard/useCreateBillboard';
 import { useUpdateBillboard } from '@/hooks/billboard/useUpdateBillboard';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ImageUpload } from '@/components/imageUpload';
 
 interface InitialData {
   label?: string;
   backgroundImage?: string;
 }
 
+const formSchema = z.object({
+  billboardName: z.string().min(1, 'Please enter billboard name'),
+  billboardImage: z.string().min(1, 'Please upload image for billboard'),
+});
+
 const BillboardForm = ({ initialData }: { initialData: InitialData }) => {
   const form = useForm({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       billboardName: initialData?.label || '',
       billboardImage: initialData?.backgroundImage || '',
@@ -44,27 +49,24 @@ const BillboardForm = ({ initialData }: { initialData: InitialData }) => {
 
   const onSuccessCb = () => {
     push(`/${storeId}/billboards`);
-  }
+  };
 
-  /**
-   * Handles form submission
-   * 
-   * If initialData is provided, will call updateBillboard mutation
-   * otherwise will call createBillboard mutation
-   * 
-   * @param {Object} data - form data
-   */
-  const onSubmit = (data : { billboardName: string; billboardImage: string }) => {
-    console.log(data)
-    if(initialData) {
-      updateMutate({
-        storeId,
-        label: data.billboardName,
-        imageUrl: data.billboardImage,
-        billboardId,
-      }, {
-        onSuccess: onSuccessCb
-      });
+  const onSubmit = (data: {
+    billboardName: string;
+    billboardImage: string;
+  }) => {
+    if (initialData) {
+      updateMutate(
+        {
+          storeId,
+          label: data.billboardName,
+          imageUrl: data.billboardImage,
+          billboardId,
+        },
+        {
+          onSuccess: onSuccessCb,
+        }
+      );
     } else {
       mutation.mutate(
         {
@@ -77,37 +79,10 @@ const BillboardForm = ({ initialData }: { initialData: InitialData }) => {
         }
       );
     }
-    
   };
 
   return (
     <div className='p-4 flex flex-col'>
-      <div className='flex flex-row gap-8'>
-        {images.map((imgSrc) => {
-          return (
-            <div
-              className='w-[200px] h-[200px] relative overflow-hidden'
-              key={imgSrc}
-            >
-              <Button
-                type='button'
-                variant='destructive'
-                className='z-10 absolute right-2 top-2'
-              >
-                <Trash2Icon className='w-4 h-4' />
-              </Button>
-
-              <Image
-                width={200}
-                height={200}
-                src={imgSrc}
-                alt={'bb'}
-                className='object-cover'
-              />
-            </div>
-          );
-        })}
-      </div>
       <div>
         <Form {...form}>
           <form
@@ -123,9 +98,16 @@ const BillboardForm = ({ initialData }: { initialData: InitialData }) => {
                     <FormLabel>Background Image</FormLabel>
                     <FormControl className='mb-4'>
                       <ImageUpload
-                        uploadedImages={uploadedImages}
-                        {...field}
-                        onChange={field.onChange}
+                        isMultiUpload={false}
+                        images={images}
+                        setImages={uploadedImages}
+                        onChange={(url) => {
+                          field.onChange(url);
+                        }}
+                        onRemove={() => {
+                          uploadedImages([]);
+                          field.onChange('');
+                        }}
                       />
                     </FormControl>
                     <FormMessage />

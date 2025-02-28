@@ -40,7 +40,7 @@ export const useColumns = () => {
   const columns: ColumnDef<Billboard>[] = [
     {
       accessorKey: 'label',
-      header: 'Name',
+      header: 'Label',
     },
     {
       accessorKey: 'createdAt',

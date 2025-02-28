@@ -7,7 +7,7 @@ import { useGetBillBoards } from '@/hooks/billboard/useGetBillboards';
 import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useColumns } from './[billboardId]/components/useColumns';
-import { APIList } from './[billboardId]/components/api-list';
+import { APIList } from '@/components/api-list';
 
 const Billboards = () => {
   const { storeId } = useParams();
@@ -15,8 +15,6 @@ const Billboards = () => {
 
   const { data: bollboardList, isLoading } = useGetBillBoards();
   const columns = useColumns();
-
-  console.log(bollboardList);
 
   const addNewBillboad = () => {
     push(`/${storeId}/billboards/new`);

@@ -12,7 +12,7 @@ export const useCreateSize = () => {
   
   return useMutation({
     mutationFn: async (request: any) => {
-      const data = await post(`${storeId}/createSize`, request);
+      const data = await post(`${storeId}/sizes`, request);
       return data;
     },
     onSuccess: () => {

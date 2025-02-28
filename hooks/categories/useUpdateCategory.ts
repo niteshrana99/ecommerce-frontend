@@ -1,4 +1,3 @@
-/* typescript-eslint-disable no-implicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useHttpService from '@/providers/useHttpService';
 import { useToast } from '../use-toast';
@@ -8,10 +7,10 @@ export const useUpdateCategory = () => {
   const { toast } = useToast();
   const { patch } = useHttpService();
   const queryClient = useQueryClient();
-  const { storeId } = useParams();
+  const { storeId, categoryId } = useParams();
   return useMutation({
     mutationFn: async (request: any) => {
-      const data = await patch(`updateCategory`, request);
+      const data = await patch(`${storeId}/categories/${categoryId}`, request);
       return data;
     },
     onSuccess: () => {
@@ -19,6 +18,7 @@ export const useUpdateCategory = () => {
             description: "Category updated successfully.",
         });
         queryClient.invalidateQueries({ queryKey: ["getCategories", storeId] });
+        queryClient.invalidateQueries({ queryKey: ["getCategoryById", categoryId] });
     },
     onError: (e: any) => {
         toast({

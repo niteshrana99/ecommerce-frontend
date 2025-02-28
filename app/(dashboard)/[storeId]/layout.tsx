@@ -12,16 +12,12 @@ export default function DashboardLayout({
   params: { storeId: string };
 }) {
   const { data, isLoading } = useGetUsersStores({ storeId: params.storeId });
-  console.log('Isnide')
 
   if(isLoading) {
     return null;
   };
 
-  console.log(data)
-
   if (!data && !isLoading) {
-    console.log('Redirecting.....')
     redirect('/');
   }
 

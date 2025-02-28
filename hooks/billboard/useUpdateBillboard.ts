@@ -1,4 +1,3 @@
-/* typescript-eslint-disable no-implicit-any */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import useHttpService from '@/providers/useHttpService';
 import { useToast } from '../use-toast';
@@ -8,10 +7,10 @@ export const useUpdateBillboard = () => {
   const { toast } = useToast();
   const { patch } = useHttpService();
   const queryClient = useQueryClient();
-  const { storeId } = useParams();
+  const { storeId, billboardId } = useParams();
   return useMutation({
     mutationFn: async (request: any) => {
-      const data = await patch(`updateBillboard`, request);
+      const data = await patch(`${storeId}/billboards/${billboardId}`, request);
       return data;
     },
     onSuccess: () => {
@@ -19,6 +18,7 @@ export const useUpdateBillboard = () => {
             description: "Billboard updated successfully.",
         });
         queryClient.invalidateQueries({ queryKey: ["getAllBillboards", storeId] });
+        queryClient.invalidateQueries({ queryKey: ["getBillboardById", billboardId] });
     },
     onError: (e: any) => {
         toast({
